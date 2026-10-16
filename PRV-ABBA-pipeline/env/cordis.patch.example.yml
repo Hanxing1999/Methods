@@ -1,0 +1,29 @@
+# ABBA MCP 注册片段
+#
+# 这是 DSH (DeepSeek Harness) profile patch 里的一条 insert 项。
+# 文件位置：C:\Users\<USER>\.dsh\profiles\desktop\cordis.patch.yml
+# 顶层是 YAML 数组；把下面这段并入该数组的 insert: 之下。
+#
+# 把 <USER> 换成本机用户名。
+# ABBA_MCP_HOME 是 abba-mcp 的工作目录（缓存、fiji.pid、fiji.log 都放这里）。
+
+- id: mcp-abba
+  name: "@deepseek-ai/dsh-mcp-client"
+  config:
+    serverName: abba
+    transport: stdio
+    command: 'C:\Users\<USER>\.local\bin\abba-mcp.exe'
+    args: []
+    env:
+      # abba-mcp 的工作目录：Java / Fiji 缓存、fiji.pid、fiji.log
+      ABBA_MCP_HOME: 'D:\abba-mcp'
+      # Windows 上 Java 进程需要这两个变量才能正常解析路径
+      SYSTEMROOT: 'C:\Windows'
+      USERPROFILE: 'C:\Users\<USER>'
+      # 让 Maven 直连：本机 ISP 的代理会劫持并导致 SSL 中断
+      NO_PROXY: '.maven.org,.scijava.org,maven.scijava.org,repo1.maven.org,repo.maven.apache.org'
+      no_proxy: '.maven.org,.scijava.org,maven.scijava.org,repo1.maven.org,repo.maven.apache.org'
+      # 其它联网（Zenodo 图谱、Appose 环境）让 Java 走系统代理
+      _JAVA_OPTIONS: '-Djava.net.useSystemProxies=true'
+      # jgo 默认读超时 10s，对国内镜像不够
+      JGO_TIMEOUT: '120'

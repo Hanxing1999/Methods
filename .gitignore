@@ -1,0 +1,23 @@
+# 本仓库只放方法学，不放数据
+# 若将来误把数据集拷进来，这些会被忽略：
+*.czi
+*.abba
+*.qpproj
+*.qpdata
+*.h5
+hx/
+_qupath/
+_abba_states/
+*.tsv
+*.roi
+
+# 系统 / 编辑器
+Thumbs.db
+desktop.ini
+.DS_Store
+*.swp
+.vscode/
+.idea/
+
+# 本地真实配置（用 example 模板代替）
+PRV-ABBA-pipeline/env/cordis.patch.yml
